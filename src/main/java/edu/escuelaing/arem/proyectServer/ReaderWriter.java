@@ -5,6 +5,7 @@
  */
 package edu.escuelaing.arem.proyectServer;
 
+import edu.escuelaing.arem.aplicationServer.Reflexwebserver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class ReaderWriter {
      * Método que lee las peticiones del browser
      * @throws  java.io.IOException excepcion
      */
-    public void read() throws IOException{
+    public void read() throws IOException, ClassNotFoundException, NoSuchMethodException{
     
     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
@@ -42,8 +43,9 @@ public class ReaderWriter {
         String inputLine;
         String  outputLine=null;
         if ((inputLine = in.readLine()) != null) { 
-        Resources data=new Resources(inputLine);
-        outputLine=data.sources();    }            
+             Reflexwebserver server = null;
+             server.load();
+        }            
         while ((inputLine = in.readLine()) != null) {               
             System.out.println("Received: " + inputLine+"|");                
             if (!in.ready()) {       
